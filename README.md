@@ -17,10 +17,7 @@ __Scrum Master:__ Giovane (Dev. Sênior)
 
 __Product Owner:__ Camila (Engenheira de Software)
 
-__Equipe de Desenvolvimento:__ - Maria Eduarda (Analista de Requisitos)
-                               - Marcelo (Dev Pleno)
-                               - Erick (Dev Junior)
-                               - Kollins (Dev Pleno)
+__Equipe de Desenvolvimento:__ - Maria Eduarda (Analista de Requisitos) - Marcelo (Dev Pleno) - Erick (Dev Junior) - Kollins (Dev Pleno)
 
 ___
 - ### __Stackholders:__
