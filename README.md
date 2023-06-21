@@ -86,4 +86,155 @@ US10: Como administrador, desejo receber notificações de transações bem-suce
 
 
 ![Alt text](image/trello%20baclog.png)
+___
+
+![Alt text](image/Diagrama%20de%20Classe.png)
 ____
+- ### __Protótipo Interface:__
+
+__Tela 01 - Login__
+![Alt text](image/login.jpg)
+
+__Tela 02 - Leitor Código de Barras__
+![Alt text](image/leitor_codigo_barras.jpg)
+
+__Tela 03 - Carrinho de Compras__
+![Alt text](image/carrinho_compras.jpg)
+
+__Tela 04 - Pagamento__
+![Alt text](image/pagamento.jpg)
+
+__Tela 05 - Confirmação__
+![Alt text](image/confirmacao.jpg)
+___
+- ### __Código Fonte:__
+```
+class TransacaoFactory:
+    def criarTransacao(self):
+        pass
+
+
+class VendaTransacaoFactory(TransacaoFactory):
+    def criarTransacao(self):
+        return VendaTransacao()
+
+
+class Transacao:
+    def registrarDetalhes(self):
+        pass
+
+    def realizarPagamento(self):
+        pass
+
+    def enviarReciboEletronico(self):
+        pass
+
+    def getValorTotal(self):
+        pass
+
+
+class VendaTransacao(Transacao):
+    # Implementação da classe VendaTransacao
+    pass
+
+
+class Produto:
+    def __init__(self, codigo, nomeProduto, preco):
+        self.codigo = codigo
+        self.nomeProduto = nomeProduto
+        self.preco = preco
+
+    def getCodigo(self):
+        return self.codigo
+
+    def getNomeProduto(self):
+        return self.nomeProduto
+
+    def getPreco(self):
+        return self.preco
+
+
+class CaixaAutomatizado:
+    def __init__(self, codigo, bancoDeDadosProdutos, transacaoFactory):
+        self.codigo = codigo
+        self.status = "Fechado"
+        self.valorTotal = 0.0
+        self.historicoTransacoes = []
+        self.bancoDeDadosProdutos = bancoDeDadosProdutos
+        self.estoque = {}
+        self.transacaoFactory = transacaoFactory
+
+    def abrirCaixa(self):
+        self.status = "Aberto"
+
+    def fecharCaixa(self):
+        self.status = "Fechado"
+
+    def registrarTransacao(self, transacao, valorTotal):
+        self.historicoTransacoes.append(transacao)
+        self.valorTotal += valorTotal
+
+    def gerarRelatorioVendas(self):
+        # Implementação da geração de relatório de vendas
+        pass
+
+    def imprimirReciboEletronico(self, transacao):
+        # Implementação da impressão do recibo eletrônico da transação
+        pass
+
+    def atualizarEstoque(self, produto, quantidade):
+        # Implementação da atualização do estoque após a transação
+        pass
+
+    def existeProduto(self, codigoBarras):
+        # Implemente a lógica para verificar a existência do produto no banco de dados externo
+        pass
+
+    def getProduto(self, codigoBarras):
+        # Implemente a lógica para obter o produto pelo código de barras do banco de dados externo
+        pass
+
+    def getQuantidadeEstoque(self, produto):
+        # Implemente a lógica para obter a quantidade em estoque do produto do banco de dados externo
+        pass
+
+    def registrarTransacaoDeVenda(self, codigosBarras):
+        valorTotalVenda = 0.0
+
+        for codigoBarras in codigosBarras:
+            if self.existeProduto(codigoBarras):
+                produto = self.getProduto(codigoBarras)
+                quantidadeEstoque = self.getQuantidadeEstoque(produto)
+
+                if quantidadeEstoque > 0:
+                    valorTotalVenda += produto.getPreco()
+                    self.atualizarEstoque(produto, quantidadeEstoque - 1)
+                else:
+                    print("Produto", produto.getNomeProduto(), "fora de estoque.")
+            else:
+                print("Produto não encontrado no banco de dados.")
+
+        transacao = self.transacaoFactory.criarTransacao()
+        self.historicoTransacoes.append(transacao)
+        self.valorTotal += valorTotalVenda
+
+
+if __name__ == "__main__":
+    bancoDeDadosProdutos = {}
+    # Adicione os produtos ao banco de dados
+
+    transacaoFactory = VendaTransacaoFactory()
+    caixa = CaixaAutomatizado("CA001", bancoDeDadosProdutos, transacaoFactory)
+
+    caixa.abrirCaixa()
+
+    codigosBarras = ["0001", "0002", "0003"]
+    caixa.registrarTransacaoDeVenda(codigosBarras)
+
+    caixa.fecharCaixa()
+```
+___
+- ### __Padrão de Projeto:__
+[Padrão de Projeto Solution Box - Factory Method](doc/Padr%C3%A3o%20de%20Projeto%20Factory%20Method.pdf)
+
+
