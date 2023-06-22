@@ -236,5 +236,9 @@ if __name__ == "__main__":
 ___
 - ### __Padrão de Projeto:__
 [Padrão de Projeto Solution Box - Factory Method](doc/Padr%C3%A3o%20de%20Projeto%20Factory%20Method.pdf)
+___
+- ### __Pitch do Projeto:__
+
+[Solution Box - Pitch com apresentação de todo o projeto](https://www.youtube.com/watch?v=xpt7Wu8pdj8)
 
 
